@@ -113,6 +113,20 @@ mp.filt%>%
   facet_wrap(sampleID~.)
 
 # graph Percent green with line/point color by rep and facet by strain
+mp.filt%>%
+  filter(index=="pctG")%>%
+  ggplot (., aes(x=date, y=value, colour=factor(sampleID)))+
+  geom_point()+
+  geom_line()+
+  facet_wrap(strain~.)
+
+# graph Percent green and red with line/point color by rep and facet by strain
+mp.filt%>%
+  filter(index %in% c("pctG","pctR"))%>%
+  ggplot (., aes(x=date, y=value, colour=factor(sampleID)))+
+  geom_point()+
+  geom_line()+
+  facet_grid(index~strain)
 
 
 # select only RGB color space and graph all indices
